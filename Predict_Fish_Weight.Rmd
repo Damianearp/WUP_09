@@ -51,21 +51,91 @@ Whitefish <- select(Whitefish, -Species)
 
 ## Perch
 
+Perch model1
+
+```{r}
+fullup <- lm(Weight~ .,data=Perch)
+summary.lm(fullup)
+```
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Perch,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
+```
+
+
 ### Best Models
+
+The best model based on the graph is the Perch model. The two element models in Perch is the best, the two regression model, height and width
+
 
 ### Best Two regressor model
 
+Our best two element models of Height and Width
 
 ## Pike
 
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Pike,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
+
 ### Best Models
 
+The Best model of Pike is a five element answer, the adjusted R square shows all five components: L1, L2, L3, H and W (height and with respectively) Are placed highest
+
 ### Best Two regressor model
+
+According from our Leaps Data, Length 1 and 3 are our best regressor models
 
 ## Roach
 
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Roach,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomleft",main="Adjusted R^2")
+```
+
+
 ### Best Models
+
+The best model is of two element answer; quite similar to Perch from a visual perspective.
 
 ### Best Two regressor model
 
+Our graph shows that L3 and with is our best regressor models
+
 ## Final Summary Statements
+
+
